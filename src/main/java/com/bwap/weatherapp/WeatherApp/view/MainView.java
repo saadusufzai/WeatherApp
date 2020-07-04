@@ -38,9 +38,6 @@ public class MainView<cityName> extends UI {
     private Image logo;
     private HorizontalLayout footer;
 
-                // IF YOU ARE HAVING ANY TROUBLE UNDERSTATING THE CODE YOU CAN WATCH MY VIDEO TUTORIAL ON YOUTUBE,
-                // open the readme file to get the link
-                // of my Tutorial on Weather APP in JAVA Using VAADIN
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -50,6 +47,7 @@ public class MainView<cityName> extends UI {
         setForm();
         dashboardTitle();
         dashboardDetails();
+
         footer();
         searchButton.addClickListener(clickEvent -> {
            if (!cityTextField.getValue().equals("")){
@@ -62,11 +60,13 @@ public class MainView<cityName> extends UI {
                Notification.show("Please Enter The City");
         });
 
+
     }
 
 
 
     public void setUpLayout() {
+        logo = new Image();
         iconImg = new Image();
         iconImg.setWidth("200px");
         iconImg.setHeight("200px");
@@ -94,9 +94,10 @@ public class MainView<cityName> extends UI {
     private void setLogo() {
         HorizontalLayout logoLayout = new HorizontalLayout();
         logoLayout.setDefaultComponentAlignment(Alignment.MIDDLE_RIGHT);
-        logo = new Image(null, new ClassResource("/static/logo.png"));
-        logo.setWidth("240px");
-        logo.setHeight("240px");
+
+        logo.setSource(new ExternalResource("https://lh3.googleusercontent.com/proxy/xsHMx9xGm0BQmcoPVHjyn4U3dLcmPVX_5VazKGvIBpPmMyumkvx-YQEfy7UV17J139vRUHePYQ9hIsy-BgVLq8BV1T3WMD-4bqYbQCMNPdoeg4QGPU4"));
+        logo.setWidth("500px");
+        logo.setHeight("340px");
         logo.setVisible(true);
         
         logoLayout.addComponents(logo);
@@ -196,6 +197,7 @@ public class MainView<cityName> extends UI {
     }
 
     //footer
+
     private void footer(){
         footer = new HorizontalLayout();
         footer.setDefaultComponentAlignment(Alignment.BOTTOM_CENTER);
@@ -204,10 +206,11 @@ public class MainView<cityName> extends UI {
         footer.setWidth("100%");
         footer.setHeight("40px");
         Label description = new Label();
-        description.setValue("Weather App by Saad Aslam. Visit my Github Repo for complete code of this project.https://github.com/saadusufzai/WeatherApp ");
+        description.setValue("Weather App by Saad Aslam . Visit my Github Repo for complete code of this project.https://github.com/saadusufzai/WeatherApp ");
         footer.addComponents(description);
         mainLayout.addComponents(footer);
     }
+
 
     //UI Update Method
     //Will be invoked only when Search Button is Clicked
@@ -246,27 +249,34 @@ public class MainView<cityName> extends UI {
             weatherDescriptionNew = weatherObject.getString("description");
             System.out.println(iconCode);
              }
-        //Setting Icon as Main Logo
-        logo.setSource(new ExternalResource("http://openweathermap.org/img/wn/"+iconCode+"@2x.png"));
         //Setting icon between city name and temp
          iconImg.setSource(new ExternalResource("http://openweathermap.org/img/wn/"+iconCode+"@2x.png"));
+        //Setting Icon as Main Logo
+
+        logo.setSource(new ExternalResource("http://openweathermap.org/img/wn/" + iconCode + "@2x.png"));
 
 
         //updating Weather Description
         weatherDescription.setValue("Description: "+weatherDescriptionNew);
 
+
+
         //Updating Max Temp
-        weatherMax.setValue("Max Temp: "+weatherService.returnMainObject().getInt("temp_max")+unitSelect.getValue());
+        weatherMax.setValue("Max Temp: "+weatherService.returnMainObject().getInt("temp_max")+"\u00b0" +unitSelect.getValue());
         //Updating Min Temp
-        weatherMin.setValue("Min Temp: "+weatherService.returnMainObject().getInt("temp_min")+unitSelect.getValue());
+        weatherMin.setValue("Min Temp: "+weatherService.returnMainObject().getInt("temp_min")+"\u00b0" +unitSelect.getValue());
         //Updating Pressure
         pressureLabel.setValue("Pressure: "+weatherService.returnMainObject().getInt("pressure"));
         //Updating Humidity
         humidityLabel.setValue("Humidity: "+weatherService.returnMainObject().getInt("humidity"));
+
         //Updating Wind
         windSpeedLabel.setValue("Wind: "+weatherService.returnWindObject().getInt("speed")+"m/s");
         //Updating Feels Like
         feelsLike.setValue("Feelslike: "+weatherService.returnMainObject().getDouble("feels_like"));
+
+
+
 
 
 

@@ -17,8 +17,7 @@ public class WeatherService {
     private Response response;
     private String cityName;
     private String unit;
-    private String APIkey = "Your API KEY HERE"; // Add your API key form OpenWeather API .Create your account and get the FREE API Key
-
+    private String APIkey = "ba61e79a0119a86f77cc471643451b24";
 
     //Getting Data from OpenWeather API
     public JSONObject getWeather(){
